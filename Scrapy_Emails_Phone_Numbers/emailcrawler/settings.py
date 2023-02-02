@@ -50,12 +50,18 @@ DOWNLOAD_DELAY = 5
 #SPIDER_MIDDLEWARES = {
 #    'emailcrawler.middlewares.EmailcrawlerSpiderMiddleware': 543,
 #}
+SPIDER_MIDDLEWARES = {
+   'emailcrawler.middlewares.EmailcrawlerSpiderMiddleware': None,
+}
 
 # Enable or disable downloader middlewares
 # See https://doc.scrapy.org/en/latest/topics/downloader-middleware.html
 #DOWNLOADER_MIDDLEWARES = {
 #    'emailcrawler.middlewares.EmailcrawlerDownloaderMiddleware': 543,
 #}
+DOWNLOADER_MIDDLEWARES = {
+   'emailcrawler.middlewares.EmailcrawlerDownloaderMiddleware': None,
+}
 
 # Enable or disable extensions
 # See https://doc.scrapy.org/en/latest/topics/extensions.html
