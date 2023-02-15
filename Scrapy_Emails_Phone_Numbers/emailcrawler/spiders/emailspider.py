@@ -134,5 +134,15 @@ class EmailspiderSpider(scrapy.Spider):
     #add price parsing column
     # find pdf, xls documents
 
+    def extract_invested_money(self,html_string):
+        #do something
+
+    def extract_annual_revenue(self,html_string):
+        #do something
+
+    def extract_investors_names(self,html_string):
+        #do something
+
+
 
 
