@@ -6,13 +6,16 @@ this repository can help
 <br>
 ## Getting Started
 
-To use this repo just download the repository, download scrapy. Start creating something awesome! Good Luck!
+To use this repo just download the repository, download scrapy. 
 
 ### Prerequisites
 
-Things reuired<br>
+Things required<br>
 1. Python3
 2. Scrapy
+  pip install scrapy
+3. BeautifulSoup4
+  pip install beautifulsoup4
 
 ### Usage
 
@@ -41,7 +44,7 @@ Feel free to submit pull requests to me.
 
 ## Authors
 
-* **Muhammad Haseeb** - *Initial work* - [Muhammad Haseeb](https://github.com/iam-mhaseeb)
+* **Joel Aftreth** **Muhammad Haseeb** - *Initial work* - [Muhammad Haseeb]
 
 
 ## License
