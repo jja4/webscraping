@@ -13,10 +13,13 @@ To use this repo just download the repository, download scrapy.
 Things required<br>
 1. Python3
 2. Scrapy
-  pip install scrapy
+```python
+pip install scrapy
+ ```
 3. BeautifulSoup4
-  pip install beautifulsoup4
-
+```python
+pip install beautifulsoup4
+ ```
 ### Usage
 
 Start the search with a keyword. I used "contacts of ceos in Pakistan" as an example.
