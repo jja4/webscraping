@@ -172,4 +172,11 @@ class EmailspiderSpider(scrapy.Spider):
     #     print(f"{url_string}: {price}")
     #     return price
 
+    def extract_invested_money(self,html_string):
+        #do something
 
+    def extract_annual_revenue(self,html_string):
+        #do something
+
+    def extract_investors_names(self,html_string):
+        #do something
