@@ -86,25 +86,14 @@ class EmailspiderSpider(scrapy.Spider):
         phone_no = self.extract_phone_numbers(html_str)
         prices = self.extract_prices(html_str)
         pdfs_xlsx = self.extract_pdfs_xls(html_str)
-        # prices_better = self.extract_prices_better(url_str)
         yield{
             "url": response.url,
             "emails": emails,
             "phone numbers": phone_no,
             "prices": prices,
-            # "prices_better": prices_better,
             "pdfs or xlsx": pdfs_xlsx
         }
 
-    # def extract_email(self, html_as_str): #original
-    #     return re.findall(r'[\w\.-]+@[\w\.-]+', html_as_str)
-
-    # def extract_emails(self,html_string):
-    #     # Regular expression pattern for matching email addresses
-    #     pattern = re.compile(r'[\w\.-]+@[\w\.-]+')
-    #     # Find all email addresses in the HTML string
-    #     emails = re.findall(pattern, html_string)
-    #     return emails
 
     def extract_emails(self,html_string):
         # Regular expression pattern for matching email addresses
@@ -141,13 +130,7 @@ class EmailspiderSpider(scrapy.Spider):
     #         prices.append(price.text)
     #     return prices
     
-    # def extract_pdfs_xmls(self,html_string):
-    #     # Regular expression pattern for matching PDF or XML file URLs
-    #     # pattern = re.compile(r'http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\(\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+\.(pdf|xml)')
-    #     pattern = re.compile(r'http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\(\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+(.pdf|.xml)')
-    #     # Find all PDF or XML file URLs in the HTML string
-    #     urls = re.findall(pattern, html_string)
-    #     return urls
+
 
     def extract_pdfs_xls(self,html_string):
         soup = BeautifulSoup(html_string, 'html.parser')
@@ -158,19 +141,6 @@ class EmailspiderSpider(scrapy.Spider):
                 urls.append(href)
         return urls
 
-    # # Loop through the products and extract their prices
-    # def extract_prices_better(self,url_string):
-    #     # Send a GET request to the product URL
-    #     response = requests.get(url_string)
-    #     soup = BeautifulSoup(response.text, "html.parser")
-        
-    #     # Find the price element on the page and extract the price
-    #     price_element = soup.find("span", class_="woocommerce-Price-amount amount")
-    #     price = price_element.text.strip() if price_element else "Not found"
-        
-    #     # Print the product name and price
-    #     print(f"{url_string}: {price}")
-    #     return price
 
     def extract_invested_money(self,html_string):
         #do something
