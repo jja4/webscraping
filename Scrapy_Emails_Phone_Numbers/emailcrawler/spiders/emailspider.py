@@ -5,6 +5,7 @@ import re
 from bs4 import BeautifulSoup
 import requests
 import regex
+from spacy.lang.xx import MultiLanguage
 
 '''
 to use: 
@@ -34,7 +35,7 @@ class EmailspiderSpider(scrapy.Spider):
     start_urls = ['https://google.com/search?q=']
     results_pages_to_scrape = 1
     page_num = 0
-
+    
     # custom_settings = {
     #     'FEED_URI': 'output.json',
     #     'FEED_FORMAT': 'jsonlines',
@@ -53,7 +54,7 @@ class EmailspiderSpider(scrapy.Spider):
         # print(url_to_follow)
         url_to_follow = [url.replace('/search?q=', 'https://google.com/search?q=') for url in url_to_follow]
         # print(url_to_follow)
-        url_to_follow = [url for url in url_to_follow if '://' in url and 'google.com/' not in url and '.google.com/sorry' not in url ]
+        url_to_follow = [url for url in url_to_follow if '://' in url and '/search?q=' not in url and 'google.com/' not in url and '.google.com/sorry' not in url ]
         print('CLEAN URLs')
         # print(url_to_follow)
         for url in url_to_follow[:]:
@@ -82,16 +83,19 @@ class EmailspiderSpider(scrapy.Spider):
     def parse_url(self, response):
         html_str = response.text
         url_str = response.url
+        # html_content = response.text
         emails = self.extract_emails(html_str)
         phone_no = self.extract_phone_numbers(html_str)
         prices = self.extract_prices(html_str)
         pdfs_xlsx = self.extract_pdfs_xls(html_str)
+        # names = self.extract_investors_names(html_content)
         yield{
             "url": response.url,
             "emails": emails,
             "phone numbers": phone_no,
             "prices": prices,
-            "pdfs or xlsx": pdfs_xlsx
+            "pdfs or xlsx": pdfs_xlsx,
+            # "names": names
         }
 
 
@@ -101,7 +105,10 @@ class EmailspiderSpider(scrapy.Spider):
         pattern = re.compile(r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b')
         # Find all email addresses in the HTML string
         emails = re.findall(pattern, html_string)
-        return emails
+        if len(emails)>0:
+            return set(emails)
+        else:
+            return
 
     # def extract_phone_number(self, html_as_str): #original
     #     return re.findall(r'\+\d{2}\s?0?\d{10}', html_as_str)
@@ -112,16 +119,27 @@ class EmailspiderSpider(scrapy.Spider):
         pattern = re.compile(r'\(?\+\d{1,3}\)?[-. ]?\(?\d{2,4}\)?[-. ]?\d{2,4}[-. ]?\d{2,4}')
         # Find all European phone numbers in the HTML string
         phones = re.findall(pattern, html_string)
-        return phones
+        if len(phones)>0:
+            return set(phones)
+        else:
+            return
     
     def extract_prices(self,html_string):
         # Regular expression pattern for matching European or American prices
         pattern = r'\p{Sc}[\d]+(?:[\d.,]+)?(?:[.,]\d{2})?'
+        pattern_str = r'\p{Sc}\d{1,3}(?:[,. ]\d{3})*\s*(?:Thousand|Million|Billion|thousand|million|billion)'
+        pattern_str2 = r'\p{Sc}\d{1,3}(?:[,. ]\d{3})*\s*(?:T|M|B)'
         # pattern = re.compile(r'\p{Sc}[\d.,]+(?:[.,]\d{2})?')
         # pattern = re.compile(r'(\$|€)\s*\d+(?:\.\d+)?')
         # Find all European or American prices in the HTML string
         prices = regex.findall(pattern, html_string)
-        return prices
+        prices_str = regex.findall(pattern_str, html_string)
+        prices_str2 = regex.findall(pattern_str2, html_string)
+        prices_all = prices + prices_str + prices_str2
+        if len(prices_all)>0:
+            return set(prices_all)
+        else:
+            return
 
     # def extract_prices(self,html_string):
     #     prices = []
@@ -139,14 +157,29 @@ class EmailspiderSpider(scrapy.Spider):
             href = link.get('href')
             if href and href.endswith(('.pdf', '.xls','.xlsx')):
                 urls.append(href)
-        return urls
+        if len(urls)>0:
+            return set(urls)
+        else:
+            return
 
 
-    def extract_invested_money(self,html_string):
-        #do something
+    # def extract_investors_names(self,html_content):
+    #     nlp = MultiLanguage()
+    #     # Convert the HTML content to plain text
+    #     # doc = nlp(html_content.decode())
+    #     doc = nlp(html_content)
+    #     # Extract all names of investors from the document
+    #     investor_names = []
+    #     for ent in doc.ents:
+    #         if ent.label_ == "PERSON":
+    #             investor_names.append(ent.text)
+    #     if len(investor_names)>0:
+    #         return set(investor_names)
+    #     else:
+    #         return
 
-    def extract_annual_revenue(self,html_string):
-        #do something
+    # def extract_annual_revenue(self,html_string):
+    #     #do something
 
-    def extract_investors_names(self,html_string):
-        #do something
+    # def extract_invested_money(self,html_string):
+    #     #do something
