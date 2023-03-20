@@ -43,6 +43,7 @@ class EmailspiderSpider(scrapy.Spider):
     # }
 
     def start_requests(self):
+        global query
         query = input("Enter your query: ")
         for url in self.start_urls:
             yield scrapy.Request("{}{}".format(url, query))
@@ -95,7 +96,7 @@ class EmailspiderSpider(scrapy.Spider):
             "phone numbers": phone_no,
             "prices": prices,
             "pdfs or xlsx": pdfs_xlsx,
-            # "names": names
+            "query": query
         }
 
 
@@ -117,18 +118,21 @@ class EmailspiderSpider(scrapy.Spider):
         # Regular expression pattern for matching European phone numbers
         # pattern = re.compile(r'\+[1-9]{2}[\s\.-]?[1-9]{1}[\s\.-]?\d{3}[\s\.-]?\d{4}[\s\.-]?\d{2,4}')
         pattern = re.compile(r'\(?\+\d{1,3}\)?[-. ]?\(?\d{2,4}\)?[-. ]?\d{2,4}[-. ]?\d{2,4}')
+        pattern_amer = re.compile(r'\(?\d{3}\)?[-. ]\d{3}[-. ]\d{4}')
         # Find all European phone numbers in the HTML string
         phones = re.findall(pattern, html_string)
-        if len(phones)>0:
-            return set(phones)
+        phones_amer = re.findall(pattern_amer, html_string)
+        phones_all = phones + phones_amer
+        if len(phones_all)>0:
+            return set(phones_all)
         else:
             return
     
     def extract_prices(self,html_string):
         # Regular expression pattern for matching European or American prices
         pattern = r'\p{Sc}[\d]+(?:[\d.,]+)?(?:[.,]\d{2})?'
-        pattern_str = r'\p{Sc}\d{1,3}(?:[,. ]\d{3})*\s*(?:Thousand|Million|Billion|thousand|million|billion)'
-        pattern_str2 = r'\p{Sc}\d{1,3}(?:[,. ]\d{3})*\s*(?:T|M|B)'
+        pattern_str = r'\p{Sc}\d{1,3}(?:[,. ]\d{1,3})*\s*(?:Thousand|Million|Billion|thousand|million|billion)'
+        pattern_str2 = r'\p{Sc}\d{1,3}(?:[,. ]\d{1,3})*\s*(?:T|M|B)'
         # pattern = re.compile(r'\p{Sc}[\d.,]+(?:[.,]\d{2})?')
         # pattern = re.compile(r'(\$|€)\s*\d+(?:\.\d+)?')
         # Find all European or American prices in the HTML string
