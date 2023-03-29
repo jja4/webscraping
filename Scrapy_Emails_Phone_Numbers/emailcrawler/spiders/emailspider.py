@@ -5,13 +5,17 @@ import re
 from bs4 import BeautifulSoup
 import requests
 import regex
-from spacy.lang.xx import MultiLanguage
+#from spacy.lang.xx import MultiLanguage
 
 '''
 to use: 
 1. open anaconda prompt/terminal
 2. cd to folder containing scrapy project
 3. enter: scrapy crawl emailspider -o output.csv
+4. when promtped about what query you want use these exmaples:
+'neurotech companies money invested'
+'eeg headsets'
+5. tune the code parameters (e.g. number of pages: results_pages_to_scrape = 1, start_urls=google, bing, chatGPT,...)
 
 The code is a web spider written using Scrapy, a Python web crawling framework. 
 The spider crawls Google search results pages and extracts information from the URLs found. 
