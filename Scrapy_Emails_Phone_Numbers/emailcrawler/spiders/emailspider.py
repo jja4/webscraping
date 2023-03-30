@@ -5,7 +5,7 @@ import re
 from bs4 import BeautifulSoup
 import requests
 import regex
-from spacy.lang.xx import MultiLanguage
+# from spacy.lang.xx import MultiLanguage
 
 '''
 to use: 
