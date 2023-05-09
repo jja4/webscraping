@@ -12,26 +12,32 @@ To use this repo just clone/download the repository, download Miniconda3.
 
 Things required<br>
 1. Miniconda3
-2. Clone repository, open Git Bash or Anaconda Prompt, go to desired install location/path: 
+2. Git Bash
+3. Clone repository, open Git Bash, cd to the desired install location/path (perhaps your Documents folder): 
 ```python
 git clone https://gitlab.cloud.eemagine.com/jaftreth/bdp-code.git
  ```
-3. Install all required packages, open Anaconda Prompt: 
+4. Install all required packages, open Anaconda Prompt: 
   ```python
   conda env create -n bdp --file environment.yml
-  **then**
+  ```
+5.  ```python
   conda activate bdp
   ```
 ### Usage
-1. cd to the location/path where the repository was installed.
-2. Start the scrapy crawler script
+1. If not already open, open Anaconda prompt
+```python
+conda activate bdp
+  ```
+2. cd to the location/path where the repository was installed.
+3. Start the scrapy crawler script
   ```python
   scrapy crawl emailspider -o output.json
   or
   scrapy crawl emailspider -o output.csv  
   ```
-3. Start the search with a keyword(s). I used "contacts of ceos in Pakistan" as an example. 
-4. Suggested keywords also include: revenue, invested money, price, contacts
+4. Start the search with a keyword(s). I used "contacts of ceos in Pakistan" as an example. 
+5. Suggested keywords also include: revenue, invested money, price, contacts
 
 ![](input.png)
 
