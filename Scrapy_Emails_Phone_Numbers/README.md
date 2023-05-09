@@ -21,7 +21,8 @@ git clone https://gitlab.cloud.eemagine.com/jaftreth/bdp-code.git
   ```python
   conda env create -n bdp --file environment.yml
   ```
-5.  ```python
+5. Activate the BDP environment 
+  ```python
   conda activate bdp
   ```
 ### Usage
