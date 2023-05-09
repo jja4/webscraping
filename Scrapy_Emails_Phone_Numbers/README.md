@@ -17,6 +17,10 @@ Things required<br>
 ```python
 git clone https://gitlab.cloud.eemagine.com/jaftreth/bdp-code.git
  ```
+4. cd to Scrapy_Emails_Phone_Numbers folder
+```python
+cd Scrapy_Emails_Phone_Numbers
+```
 4. Install all required packages, open Anaconda Prompt: 
   ```python
   conda env create -n bdp --file environment.yml
@@ -30,7 +34,7 @@ git clone https://gitlab.cloud.eemagine.com/jaftreth/bdp-code.git
 ```python
 conda activate bdp
   ```
-2. cd to the location/path where the repository was installed.
+2. cd to the location/path where the repository was installed (cd path/to/bdp-code/Scrapy_Emails_Phone_Numbers)
 3. Start the scrapy crawler script
   ```python
   scrapy crawl emailspider -o output.json
