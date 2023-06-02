@@ -5,7 +5,10 @@ import re
 from bs4 import BeautifulSoup
 import requests
 import regex
+import spacy
 # from spacy.lang.xx import MultiLanguage
+# nlp = MultiLanguage()
+nlp = spacy.load("en_core_web_sm")
 
 '''
 to use: 
@@ -57,10 +60,10 @@ class EmailspiderSpider(scrapy.Spider):
         url_to_follow = response.css("a::attr(href)").extract()
         # print('RAW URLs')
         # print(url_to_follow)
-        url_to_follow = [url.replace('/search?q=', 'https://google.com/search?q=') for url in url_to_follow]
+        url_to_follow = [url.replace('/search?q=', 'https://www.google.com/search?q=') for url in url_to_follow]
         # print(url_to_follow)
         url_to_follow = [url for url in url_to_follow if '://' in url and '/search?q=' not in url and 'google.com/' not in url and '.google.com/sorry' not in url ]
-        print('CLEAN URLs')
+        # print('CLEAN URLs')
         # print(url_to_follow)
         for url in url_to_follow[:]:
             yield scrapy.Request(
@@ -73,7 +76,7 @@ class EmailspiderSpider(scrapy.Spider):
         # next_pages_urls = response.css("#foot table a::attr(href)").extract()
         # print('NEXT PAGE URLs')
         # print(next_pages_urls)
-        next_pages_urls = [url.replace('/search?q=', 'https://google.com/search?q=') for url in next_pages_urls]
+        next_pages_urls = [url.replace('/search?q=', 'https://www.google.com/search?q=') for url in next_pages_urls]
         for num, url in enumerate(next_pages_urls):
             if(self.page_num < self.results_pages_to_scrape):
                 next_page_url = response.urljoin(url)
@@ -93,6 +96,8 @@ class EmailspiderSpider(scrapy.Spider):
         phone_no = self.extract_phone_numbers(html_str)
         prices = self.extract_prices(html_str)
         pdfs_xlsx = self.extract_pdfs_xls(html_str)
+        people = self.extract_investors_names(html_str)
+        money = self.extract_money(html_str)
         # names = self.extract_investors_names(html_content)
         yield{
             "url": response.url,
@@ -100,6 +105,8 @@ class EmailspiderSpider(scrapy.Spider):
             "phone numbers": phone_no,
             "prices": prices,
             "pdfs or xlsx": pdfs_xlsx,
+            'people': people,
+            'money': money,
             "query": query
         }
 
@@ -170,24 +177,44 @@ class EmailspiderSpider(scrapy.Spider):
         else:
             return
 
+    
+    def extract_investors_names(self,html_string):
+        # nlp = spacy.load("en_core_web_sm")
+        doc = nlp(html_string)
 
-    # def extract_investors_names(self,html_content):
-    #     nlp = MultiLanguage()
-    #     # Convert the HTML content to plain text
-    #     # doc = nlp(html_content.decode())
-    #     doc = nlp(html_content)
-    #     # Extract all names of investors from the document
-    #     investor_names = []
-    #     for ent in doc.ents:
-    #         if ent.label_ == "PERSON":
-    #             investor_names.append(ent.text)
-    #     if len(investor_names)>0:
-    #         return set(investor_names)
-    #     else:
-    #         return
+        people = [ent.text for ent in doc.ents if ent.label_ == "PERSON"]
+        if len(people)>0:
+            return set(people)
+        else:
+            return
+        
+    def extract_money(self,html_string):
+        # nlp = spacy.load("en_core_web_sm")
+        doc = nlp(html_string)
 
-    # def extract_annual_revenue(self,html_string):
-    #     #do something
+        money = [ent.text for ent in doc.ents if ent.label_ == "MONEY"]
+        if len(money)>0:
+            return set(money)
+        else:
+            return
+        
+        # possible values for ent.label_ include:
 
-    # def extract_invested_money(self,html_string):
-    #     #do something
+        # PERSON: People, including fictional.
+        # NORP: Nationalities or religious or political groups.
+        # FAC: Buildings, airports, highways, bridges, etc.
+        # ORG: Companies, agencies, institutions, etc.
+        # GPE: Countries, cities, states.
+        # LOC: Non-GPE locations, mountain ranges, bodies of water.
+        # PRODUCT: Objects, vehicles, foods, etc. (not services)
+        # EVENT: Named hurricanes, battles, wars, sports events, etc.
+        # WORK_OF_ART: Titles of books, songs, etc.
+        # LAW: Named documents made into laws.
+        # LANGUAGE: Any named language.
+        # DATE: Absolute or relative dates or periods.
+        # TIME: Times smaller than a day.
+        # PERCENT: Percentage (including “%”).
+        # MONEY: Monetary values, including unit.
+        # QUANTITY: Measurements, as of weight or distance.
+        # ORDINAL: “first”, “second”, etc.
+        # CARDINAL: Numerals that do not fall under another type.
