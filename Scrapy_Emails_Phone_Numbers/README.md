@@ -78,12 +78,19 @@ conda env update -f environment.yml --prune
 ```
 ### Keywords to use:
 To search for phone numbers, use these keywords:
+
 Phone number, contact, telephone, +49 or other relevant country codes
+
 For emails:
+
 Email, contact
+
 For prices:
+
 Price, product code, cost
+
 To search for company revenues, use these keywords:
+
 Revenue, financials, annual report, investments or income statement
 
 ![](input.png)
@@ -97,16 +104,24 @@ After the process finished, you can see output in specified file
 ## Troubleshooting
 If you run into the problem where the scrapy code executes, but you do not get any results,
 with output similar to this:
+
 Here is the solution:
+
 Open the settings.py file in
 “bdp-code\Scrapy_Emails_Phone_Numbers\emailcrawler\settings.py”
+
 On line 20 or so, change:
+
 USER_AGENT = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML,
 like Gecko) Chrome/61.0.3163.100 Safari/537.36'
+
 to
+
 USER_AGENT = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML,
 like Gecko) Chrome/89.0.4389.82 Safari/537.36'
+
 Save the file, and try again.
+
 If still having trouble try a higher number like 91.0.4389.82 until it works again. The first
 number should be between 61 and 113, these are the versions of Chrome.
 
