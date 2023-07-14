@@ -105,7 +105,7 @@ After the process finished, you can see output in specified file
 If you run into the problem where the scrapy code executes, but you do not get any results,
 with output similar to this:
 
-![](blocked_input.PNG)
+![](blocked_output.PNG)
 
 
 Here is the solution:
