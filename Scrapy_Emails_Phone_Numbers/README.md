@@ -29,6 +29,33 @@ cd Scrapy_Emails_Phone_Numbers
   ```python
   conda activate bdp
   ```
+
+### Prerequisites
+Things required to get started:
+1. Download Miniconda3
+(https://docs.conda.io/en/latest/miniconda.html#windows-installers)
+2. Download Git Bash (https://gitforwindows.org/)
+3. Clone repository by opening Git Bash, change directories (cd) to the desired install
+location/path (perhaps your Documents folder), then:
+  ```python
+  git clone https://gitlab.cloud.eemagine.com/jaftreth/bdp-code.git
+  ```
+4. Change directories (cd) to Scrapy_Emails_Phone_Numbers folder
+  ```python
+  cd Scrapy_Emails_Phone_Numbers
+  ```
+5. Install all required packages, open Anaconda Prompt, then:
+  ```python
+  conda env create -n bdp --file environment.yml
+  ```
+6. Activate the BDP environment
+  ```python
+  conda activate bdp
+  ```
+7. Run the following command to install a language processing AI model
+  ```python
+  python -m spacy download en_core_web_sm --user
+  ```
 ### Usage
 1. If not already open, open Anaconda prompt
 ```python
