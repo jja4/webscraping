@@ -79,19 +79,19 @@ conda env update -f environment.yml --prune
 ### Keywords to use:
 To search for phone numbers, use these keywords:
 
-Phone number, contact, telephone, +49 or other relevant country codes
+  Phone number, contact, telephone, +49 or other relevant country codes
 
 For emails:
 
-Email, contact
+  Email, contact
 
 For prices:
 
-Price, product code, cost
+  Price, product code, cost
 
 To search for company revenues, use these keywords:
 
-Revenue, financials, annual report, investments or income statement
+  Revenue, financials, annual report, investments or income statement
 
 ![](input.png)
 
