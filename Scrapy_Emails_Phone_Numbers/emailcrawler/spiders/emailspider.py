@@ -96,8 +96,8 @@ class EmailspiderSpider(scrapy.Spider):
         phone_no = self.extract_phone_numbers(html_str)
         prices = self.extract_prices(html_str)
         pdfs_xlsx = self.extract_pdfs_xls(html_str)
-        people = self.extract_investors_names(html_str)
-        money = self.extract_money(html_str)
+        ## people = self.extract_investors_names(html_str)
+        ## money = self.extract_money(html_str)
         # names = self.extract_investors_names(html_content)
         yield{
             "url": response.url,
@@ -105,8 +105,8 @@ class EmailspiderSpider(scrapy.Spider):
             "phone numbers": phone_no,
             "prices": prices,
             "pdfs or xlsx": pdfs_xlsx,
-            'people': people,
-            'money': money,
+            ## 'people': people,
+            ## 'money': money,
             "query": query
         }
 
