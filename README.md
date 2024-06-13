@@ -58,7 +58,7 @@ scrapy crawl emailspider -o new_name.csv
 ```
 4. Start the search with your google search query. For example:
 ```python
-eeg companies germany
+machine learning companies germany
 ```
 
 ### Advanced Usage
