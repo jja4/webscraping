@@ -1,9 +1,12 @@
-# Python-Scrapy-Email-Phone-Number-Crawler
-This python script search/google certain keywords, crawls the webpages from the results, and return all emails & phone numbers found.
-<br>
-Sometime we cant find the emails of persons relevant to our business, we need a way to find emails of our relevant persons
-this repository can help
-<br>
+## Web Scraping Tool for Creating Contact Lists
+
+This project is a web scraping tool designed to extract contact information, such as names, phone numbers, and email addresses, from various websites. The tool utilizes the Scrapy framework and can be used to create comprehensive contact lists or databases for various purposes, such as lead generation, market research, or data analysis.
+
+The tool is designed to be user-friendly and can be easily configured to scrape specific websites or search for specific keywords. It leverages the power of Google search to identify relevant websites and then crawls those websites to extract the desired contact information.
+
+The extracted data is saved in a CSV file, which can be easily imported into spreadsheet software or databases for further analysis or processing.
+
+
 ## Getting Started
 ### Prerequisites
 Things required to get started:
@@ -13,7 +16,7 @@ Things required to get started:
 3. Clone repository by opening Git Bash, change directories (cd) to the desired install
 location/path (perhaps your Documents folder), then:
   ```python
-  git clone https://gitlab.cloud.eemagine.com/jaftreth/bdp-code.git
+  git clone https://github.com/jja4/webscraping.git
   ```
 4. Change directories (cd) to Scrapy_Emails_Phone_Numbers folder
   ```python
@@ -21,11 +24,11 @@ location/path (perhaps your Documents folder), then:
   ```
 5. Install all required packages, open Anaconda Prompt, then:
   ```python
-  conda env create -n bdp --file environment.yml
+  conda env create -n webscraping --file environment.yml
   ```
-6. Activate the BDP environment
+6. Activate the webscraping environment
   ```python
-  conda activate bdp
+  conda activate webscraping
   ```
 7. Run the following command to install a language processing AI model
   ```python
@@ -34,11 +37,11 @@ location/path (perhaps your Documents folder), then:
 ### Basic Usage
 1. If not already open, open Anaconda prompt, then:
 ```python
-conda activate bdp
+conda activate webscraping
 ```
 2. cd to the location/path where the repository was installed (don’t copy exactly below)
 ```python
-cd path/to/bdp-code/Scrapy_Emails_Phone_Numbers
+cd path/to/webscraping/Scrapy_Emails_Phone_Numbers
 ```
 3. Start the scrapy crawler script:
 ```python
@@ -65,7 +68,7 @@ On Line ~43 of emailspider.py, change “results_pages_to_scrape = 1” to
 To update the code to the latest version:
 1. Open Git Bash, change directory to the Scrapy Tool project:
 ```python
-cd ‘/path/to/bdp-code/Scrapy_Emails_Phone_Numbers’
+cd ‘/path/to/webscraping/Scrapy_Emails_Phone_Numbers’
 ```
 2. Download the new code
 ```python
@@ -73,7 +76,7 @@ git pull
 ```
 3. Open Anaconda Prompt, update the environment by:
 ```python
-conda activate bdp
+conda activate webscraping
 conda env update -f environment.yml --prune
 ```
 ### Keywords to use:
@@ -111,7 +114,7 @@ with output similar to this:
 Here is the solution:
 
 Open the settings.py file in
-“bdp-code\Scrapy_Emails_Phone_Numbers\emailcrawler\settings.py”
+“webscraping\Scrapy_Emails_Phone_Numbers\emailcrawler\settings.py”
 
 On line 20 or so, change:
 
