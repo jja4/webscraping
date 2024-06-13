@@ -96,19 +96,19 @@ To search for company revenues, use these keywords:
 
   Revenue, financials, annual report, investments or income statement
 
-![](input.png)
+![](Scrapy_Emails_Phone_Numbers/input.png)
 
 The search and crawling process will take quite a while as it retrieves maximum results from Google & try to crawl all of them.
 After the process finished, you can see output in specified file
 
-![](output.png)
+![](Scrapy_Emails_Phone_Numbers/output.png)
 
 
 ## Troubleshooting
 If you run into the problem where the scrapy code executes, but you do not get any results,
 with output similar to this:
 
-![](blocked_ouput.PNG)
+![](Scrapy_Emails_Phone_Numbers/blocked_ouput.PNG)
 
 
 Here is the solution:
